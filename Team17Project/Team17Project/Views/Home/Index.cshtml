@@ -1,0 +1,38 @@
+﻿@model IEnumerable<Team17Project.Models.Image>
+
+@{
+    /**/
+
+    ViewBag.Title = "Team17Project Beta v1.03";
+    Layout = "~/Views/Home/_HomeLayout.cshtml";
+
+
+}
+<style>
+
+    .fix-size {
+        width: 400px;
+        height: 300px;
+    }
+</style>
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">Danh sách ảnh</h1>
+        </div>
+        @foreach (var item in Model)
+        {
+            <div class="col-lg-4 col-md-6 thumb">
+                <a class="thumbnail" href="@Url.Action("Details", "Images", new { id = item.Id})">
+                    <div>
+                        <img class="img-responsive fix-size" src="@item.Url" alt="picture" />
+                    </div>
+                </a>
+            </div>
+
+        }
+
+    </div>
+</div>
+

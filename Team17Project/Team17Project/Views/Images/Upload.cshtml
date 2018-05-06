@@ -1,0 +1,48 @@
+﻿@model Team17Project.Models.UploadedFile
+
+<style>
+    .top {
+        top: 5px;
+    }
+</style>
+
+@{
+    ViewBag.Title = "Đăng ảnh";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (ViewBag.UploadMessage != null)
+{
+    <h2>@ViewBag.UploadMessage</h2>
+    @Html.ActionLink("Đăng nhập", "Index", "Home");
+}
+
+
+<h2> Đăng ảnh </h2>
+<hr />
+    
+@using (Html.BeginForm("Upload", "Images", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+
+<div class="form-horizontal">
+
+
+    <div class="form-group row">
+        @Html.TextBoxFor(model => model.FileInput, new { type = "file", @class = "col-md-offset-5" })
+        <p class="help-block col-md-offset-5">Chỉ hỗ trợ định dạng .jpg, .png</p>
+        @Html.ValidationMessageFor(model => model.FileInput, "", new { @class = "text-danger col-md-offset-5" })
+
+    </div>
+    <div class="form-group row">
+        @Html.Label("LocationId", "Địa điểm", htmlAttributes: new { @class="top col-md-offset-4 col-md-1"})
+        @Html.DropDownList("LocationId", null, htmlAttributes: new { @class="col-md-5"})
+    </div>
+    <button type="submit" class="btn btn-success col-md-offset-5">Đăng ảnh</button>
+</div>
+}
+
+
+
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jqueryval")
+

@@ -1,0 +1,11 @@
+﻿
+@{ 
+    var id = Convert.ToInt32(Session["Login"].ToString());
+    var dbContent = new Team17Project.Models.Team17ProjectBetaDatabaseEntities();
+    var username = (from user in dbContent.Users
+                    where user.Id == id
+                    select user.Username).FirstOrDefault();
+}
+<li>@Html.ActionLink("Upload", "Upload", "Images")</li>
+<li>@Html.ActionLink(username, "Profile", "Users")</li>
+<li>@Html.ActionLink("Đăng xuất", "Logout", "Auth")</li>

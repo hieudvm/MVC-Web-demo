@@ -1,0 +1,84 @@
+﻿@model Team17Project.Models.Image
+@using Team17Project.Models;
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    
+}
+
+<style>
+
+    .height {
+        height: 400px;
+        padding: 5px
+    }
+    .width {
+        width: 275px;
+    }
+    .border {
+        border: 1px solid #DDDDDD;
+        border-radius: 8px 0 8px 0;
+        background-color: #F5F5F5;
+    }
+
+    .scroll {
+        overflow: scroll;
+        overflow-x: hidden;
+    }
+
+    .comment {
+        height: 50px;
+        margin-top: 10px;
+        width: 225px
+    }
+
+    .but {
+        margin-top: 10px;
+        position: relative;
+        left: 20px;
+        height: 50px;
+
+    }
+
+    #content {
+        word-wrap:break-word;
+    }
+
+    .username {
+        color:cornflowerblue;
+    }
+</style>
+
+<div>
+    <h4>Image</h4>
+    <hr />
+    <div class="row">
+        <img src="@Url.Content(Model.Url)" class="col-md-9 height" />
+        <div class="border height pull-right width scroll">
+            @foreach (var comment in ViewBag.Comments)
+            {
+                <div id="content">
+                    <p><span class="username"><span class="glyphicon glyphicon-user"></span> @comment.Username</span>: @comment.Text</p>
+
+                </div>
+            }
+        </div>
+    </div>
+    @using (Html.BeginForm("Comment", "Images", FormMethod.Post))
+    {
+
+        @Html.AntiForgeryToken()
+        <div class="row">
+            @Html.Hidden("ImageId", Model.Id)
+            <div>
+
+                <textarea name="Text" rows="5" class="pull-right comment border"></textarea>
+                <input type="submit" class="btn btn-success but col-md-offset-9" value="Gửi" />
+            </div>
+            
+
+        </div>
+    }
+
+</div>
+
